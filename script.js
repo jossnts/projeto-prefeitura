@@ -6,7 +6,9 @@
     filterPanel.classList.toggle("active");
   });
 
-
+function removerAcentos(texto) {
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 function search() {
   let botaoPesquisa = document.querySelector("#pesquisar") //pega o botao pesquisar
@@ -16,8 +18,8 @@ function search() {
 
   dados.forEach(dado => { //passa por todas as unidades, uma por uma, significa que dado, é 1 unidade
 
-      let pesquisaMinusculo = botaoPesquisa.value.toLowerCase() //deixa todo o valor dentro da pesquisa em minusculo
-      let dadosMinusculo = dado.textContent.toLowerCase() //deixa todo o texto das unidades em minusculo
+      let pesquisaMinusculo = removerAcentos(botaoPesquisa.value.toLowerCase()) //deixa todo o valor dentro da pesquisa em minusculo e remove acentos
+      let dadosMinusculo = removerAcentos(dado.textContent.toLowerCase()) //deixa todo o texto das unidades em minusculo e remove acentos 
       console.log(`Buscando por "${pesquisaMinusculo}" dentro de "${dadosMinusculo}"`) //testando pra ver se ta rodando
 
      if (dadosMinusculo.includes(pesquisaMinusculo)) { //SE A UNIDADE CONTEM O VALOR QUE ESTÁ DENTRO DA PESQUISA, APARECE ou se no livro(dadosMinusculo) contém o que foi digitado em (pesquisaMinusculo)
@@ -170,7 +172,7 @@ unidadeCaisSetup()
 
       let paragrafoInterno = unidadeIndividual.querySelector(".tipo-unidade")
 
-      if (paragrafoInterno) {
+      if (paragrafoInterno) { 
 
         let paragrafoValue = paragrafoInterno.dataset.value
 

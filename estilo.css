@@ -198,6 +198,10 @@
         position: fixed;
     }
 
+    .filter-panel-container {
+        font-size: 80%;
+    }
+
     .opcao-bairro {
         display: flex;
     }
