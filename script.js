@@ -85,7 +85,7 @@ function bairroSetup() {
 bairroSetup() 
 function bairros() {
 
-  let bairros = document.querySelectorAll("input[name='bairros'])")
+  let bairros = document.querySelectorAll("input[name='bairros']")
 
   let bairroSelecionado = ''
 
@@ -120,7 +120,6 @@ function regiaoBairroSetup() {
 regiaoBairroSetup()
 function regiaoBairro() {
   let regioes = document.querySelectorAll("input[name='regiao']")
-  let labelBairros= document.querySelectorAll("label:has(input[name='bairros'])")
   let regiaoSelecionada = ''
 
   regioes.forEach(regiao => {
@@ -129,20 +128,66 @@ function regiaoBairro() {
     }
   })
 
-  labelBairros.forEach(bairroLabel => {
-  const input = bairroLabel.querySelector("input[name='bairros']")
+  const todosOsBairros = document.querySelectorAll(".opcao-bairro")
 
-  if(input) {
+  todosOsBairros.forEach(containerDoBairro => {
 
-    if (regiaoSelecionada === input.dataset.regiao) {
-    bairroLabel.style.display = "flex"
-  }
-  else {
-    bairroLabel.style.display = "none"
-  }
+    if (regiaoSelecionada === "todos") {
+      containerDoBairro.style.display = "flex"
+    }
+    else if (containerDoBairro.dataset.regiao === regiaoSelecionada) {
+      containerDoBairro.style.display = "flex"
+    }
+    else {
+      containerDoBairro.style.display = "none"
+    }
+  })} 
+
+function unidadeCaisSetup() {
+ let tipoDeUnidade = document.querySelectorAll("input[name='unidades']")
+
+  tipoDeUnidade.forEach(unidades => {
+    unidades.addEventListener("change", unidadeCais)
+  })
 } 
-})
-}
+
+unidadeCaisSetup()
+
+  function unidadeCais() {
+    let unidades = document.querySelectorAll(".unidade") //dataset-value 
+    let tipoDeUnidade = document.querySelectorAll("input[name='unidades']") //value
+    let tipoUnidadeSelecionado = ''
+
+    tipoDeUnidade.forEach(Tipounidade => {
+      if(Tipounidade.checked) {
+        tipoUnidadeSelecionado = Tipounidade.value
+      }
+
+      console.log(tipoUnidadeSelecionado)
+    })  
+
+    unidades.forEach(unidadeIndividual => {
+
+      let paragrafoInterno = unidadeIndividual.querySelector(".tipo-unidade")
+
+      if (paragrafoInterno) {
+
+        let paragrafoValue = paragrafoInterno.dataset.value
+
+      if (paragrafoValue == tipoUnidadeSelecionado) {
+
+        unidadeIndividual.style.display = "flex"
+      }
+      else {
+        unidadeIndividual.style.display = "none"
+      }
+
+      console.log(paragrafoValue)
+    }})
+  }
+      
+    
+
 
 
 
