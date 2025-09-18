@@ -1,0 +1,297 @@
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Helvetica,  Arial, sans-serif;
+    }
+
+    /*Configuração da navbar*/
+    .navegation {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        max-height: 130px;
+        min-height: 130px;
+        background: white;
+        position: fixed;
+        box-sizing: border-box;
+        padding: 0 10%;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 5%;
+    }
+
+    .navegation span {
+        font-size: 2.5em;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: left;
+    }
+
+    .logo img {
+        width: 10%;
+        min-width: 10%;
+        max-width: 10%;
+        height: auto;
+    }
+
+/*Configuração do conteudo principal da página*/
+
+    .principal {
+        padding: 5%;
+        margin-top: 5%;
+        background: white;
+    }
+
+    .section-one {
+        display: grid;
+        background: white;
+        justify-content: center;
+    }
+
+    .container {
+        display: grid;
+        grid-column: 1;
+        grid-template-rows: auto 1fr;
+    }
+
+    .titulo-one {
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 2%;
+    }
+
+/*Configuração da navbar segundaria*/
+
+    .nav-one {
+        width: 100%;
+        max-width: 1750px;
+        min-width: 1200px;
+        height: 15vh;
+        background: rgb(255, 255, 255);
+        box-sizing: border-box;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        padding: 12px 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .nav-one p {
+        text-align: center;
+    }
+
+    .nav-one-flex {
+        display: flex;
+        align-items: center; 
+        justify-content: center; 
+        flex: 1; 
+        gap: 5%;
+    }
+
+    .button-one {
+        background: rgb(0, 89, 253);
+        color: white;
+        width: 100%;
+        max-width: 300px;
+        padding: 1%;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 1em;
+        display: flex;
+        justify-content: space-evenly;
+        box-sizing: border-box;
+        border: none;             
+        appearance: none;          
+        -webkit-appearance: none; 
+        -moz-appearance: none;     
+
+    }
+
+    .button-one:hover {
+        background: black;
+        color: white;
+    }
+
+    .div-flex {
+        display: flex;
+        gap: 5%;
+        align-items: center;
+    }
+
+    .search-box {
+        width: 700px;
+        display: flex;
+        padding: 1%;
+        border-radius: 20px;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        border: 1px solid #e5e7eb;
+        justify-content: space-between;
+    }
+
+    .search-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: rgb(255, 255, 255);
+    }
+
+    .search-box button {
+       width: auto;
+       background: white;
+       border-style: none;
+    }
+
+    /*Configuração do botão e painel filtro*/
+
+    .filter-btn {
+        width: 100%;
+        max-width: 100px;
+        min-width: 100px;
+        display: flex;
+        align-items: center;
+        background: rgb(0, 89, 253);
+        color: white;
+        padding: 1%;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .filter-btn:hover {
+        background: black;
+    }
+
+/* Painel de filtros escondido por padrão */
+    .filter-panel {
+        position: fixed;
+        top: 0;
+        right: -300px; 
+        width: 200px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+        padding: 2%;
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        z-index: 2000;
+        text-align: center;
+    }
+
+    .filter-panel h3 {
+        text-align: left;
+    }
+
+/* Ativo (visível) */
+    .filter-panel.active {
+        right: 0;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /*Configuração do filtro da segunda navbar*/
+
+    .div-two {
+        width: 100%;
+        max-width: 1750px;
+        min-width: 1200px;
+        height: 65vh;
+        background: white;
+        box-sizing: border-box;
+        padding: 3%;
+        gap: 2.5%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+        overflow-y: auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .unidade {
+        width: 100%;
+        max-width: 500px;
+        min-width: 450px;
+        height: 100%;
+        max-height: 300px;
+        min-height: 250px;
+        background: white;
+        box-sizing: border-box;
+        padding: 2%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2%;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        margin-bottom: 2%;
+    }
+
+    .unidade a {
+        text-decoration: none;
+        color: black;
+        background: rgb(224, 224, 224);
+        padding: 4% 4%;
+        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+    }
+
+    .unidade h3 {
+        width: 100%;
+        color: rgb(0, 102, 255);
+    }
+
+    .unidade p {
+        width: 100%;
+    }
+
+    .tipo-unidade {
+        margin-top: 6px;
+        font-weight: bold;
+        color: #2c3e50; 
+        font-size: 0.95rem; 
+        
+    }
+
+    .icones {
+        font-size: 1.2em;
+        color: gray;
+    }
+
+    .icones-one {
+        font-size: 1.2em;
+    }
+
+    /*Configuração do rodpé*/
+
+    .footer-one {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        min-height: 50px;
+        color: white;
+        background: rgb(0, 0, 48);
+        clear: both;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        z-index: 10;          
+    }
+
+
+
