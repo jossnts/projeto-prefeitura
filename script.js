@@ -1,10 +1,13 @@
 
-  const filterBtn = document.querySelector(".filter-btn");
+  const filterBtn = document.querySelectorAll(".filter-btn");
   const filterPanel = document.querySelector(".filter-panel");
 
-  filterBtn.addEventListener("click", () => {
+  filterBtn.forEach(filtro => {
+
+  filtro.addEventListener("click", () => {
     filterPanel.classList.toggle("active");
   });
+})
 
 function removerAcentos(texto) {
   return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");

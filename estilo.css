@@ -1,304 +1,355 @@
-    * {
-        margin: 0;
-        padding: 0;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
 
-    body {
-        font-family: Helvetica,  Arial, sans-serif;
-    }
+html {
+    /* Define um tamanho de fonte base para o documento */
+    font-size: 16px;
+}
 
-    /*Configuração da navbar*/
-    .navegation {
-        width: 100%;
-        height: 100%;
-        top: 0;
-        max-height: 130px;
-        min-height: 130px;
-        background: white;
-        position: fixed;
-        box-sizing: border-box;
-        padding: 0 10%;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        gap: 5%;
-    }
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #f4f4f4;
+}
 
-    .navegation span {
-        font-size: 2.5em;
-    }
+/* --- Configuração do Cabeçalho --- */
+.navegation {
+    width: 100%;
+    min-height: 130px;
+    background: white;
+    position: fixed;
+    top: 0;
+    padding: 15px 5%;
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-    .logo {
-        display: flex;
-        justify-content: left;
-    }
+.navegation span {
+    font-size: 2.5rem;
+}
 
-    .logo img {
-        width: 10%;
-        min-width: 10%;
-        max-width: 10%;
-        height: auto;
-    }
+.logo img {
+    width: 100px;
+    height: auto;
+}
 
-/*Configuração do conteudo principal da página*/
+/* --- Configuração do Conteúdo Principal --- */
+.principal {
+    padding: 20px;
+    margin-top: 150px;
+    background: white;
+}
 
+.section-one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 1750px;
+}
+
+.titulo-one {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* --- Barra de Ferramentas (Pesquisa e Filtros) --- */
+.nav-one {
+    width: 100%;
+    height: auto;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-one p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.nav-one-flex {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1 1 50px; /* Permite crescer e encolher com base de 300px */
+    max-width: 700px;
+    display: flex;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    border: 1px solid #e5e7eb;
+    justify-content: space-between;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-btn, .button-one {
+    background: rgb(0, 89, 253);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.filter-btn:hover, .button-one:hover {
+    background: black;
+}
+
+/* --- Painel de Filtros --- */
+.filter-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    max-width: 90%;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 2000;
+    padding: 50px 15px 15px 15px;
+}
+
+.filter-panel.active {
+    right: 0;
+}
+
+
+#botao-filtros {
+    position: absolute;
+    z-index: 2002;
+    top: 10px;
+    right: 250px; 
+    padding: 8px 12px;
+}
+
+
+.filter-panel h3 {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.filter-panel-container {
+    position: relative;
+    z-index: 1; /* Valor menor que o do botão */
+    font-size: 0.9rem;
+    height: 100%;
+    overflow-y: auto; /* Apenas este container terá rolagem */
+}
+
+.opcao-bairro {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* --- Container das Unidades --- */
+.div-two {
+    width: 100%;
+    min-height: 65vh; /* Usar min-height para permitir que cresça */
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    border: 1px solid #e5e7eb;
+    overflow-y: auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.unidade {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    min-height: 250px;
+    background: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.unidade h3 {
+    width: 100%;
+    color: rgb(0, 102, 255);
+}
+
+.unidade p {
+    width: 100%;
+}
+
+.unidade a {
+    text-decoration: none;
+    color: black;
+    background: rgb(224, 224, 224);
+    padding: 8px 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tipo-unidade {
+    margin-top: auto;
+    padding-top: 10px;
+    font-weight: bold;
+    color: #2c3e50; 
+    font-size: 0.95rem; 
+}
+
+.icones-one {
+    font-size: 1.2em;
+}
+
+/* --- Configuração do Rodapé --- */
+.footer-one {
+    width: 100%;
+    min-height: 50px;
+    color: white;
+    background: rgb(0, 0, 48);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 10px;
+    text-align: center;
+}
+
+/* ############################################### */
+/* ############### MEDIA QUERIES ################# */
+/* ############################################### */
+
+/* --- Telas de Tablet (até 768px) --- */
+@media (max-width: 768px) {
     .principal {
-        padding: 5%;
-        margin-top: 5%;
-        background: white;
+        padding: 15px;
+        margin-top: 130px;
     }
-
-    .section-one {
-        display: grid;
-        background: white;
-        justify-content: center;
+    .navegation span {
+        font-size: 2rem;
     }
-
-    .container {
-        display: grid;
-        grid-column: 1;
-        grid-template-rows: auto 1fr;
-    }
-
     .titulo-one {
-        text-align: center;
-        font-size: 2em;
-        margin-bottom: 2%;
+        font-size: 1.5rem;
     }
-
-/*Configuração da navbar segundaria*/
-
-    .nav-one {
-        width: 100%;
-        max-width: 1750px;
-        min-width: 1200px;
-        height: 15vh;
-        background: rgb(255, 255, 255);
-        box-sizing: border-box;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        border: 1px solid #e5e7eb;
-        display: flex;
-        flex-direction: column; 
-        justify-content: center; 
-        padding: 12px 20px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+    #botao-filtros {
+        right: 250px;
     }
+}
 
-    .nav-one p {
-        text-align: center;
-    }
-
+/* --- Telas de Celular (a partir de 600px) --- */
+@media (max-width: 600px) {
     .nav-one-flex {
-        display: flex;
-        align-items: center; 
-        justify-content: center; 
-        flex: 1; 
-        gap: 5%;
+        flex-direction: column; 
+        gap: 15px;
     }
-
-    .button-one {
-        background: rgb(0, 89, 253);
-        color: white;
+    .search-box, .button-one {
         width: 100%;
-        max-width: 300px;
-        padding: 1%;
-        border-radius: 15px;
-        cursor: pointer;
-        font-size: 1em;
-        display: flex;
-        justify-content: space-evenly;
-        box-sizing: border-box;
-        border: none;             
-        appearance: none;          
-        -webkit-appearance: none; 
-        -moz-appearance: none;     
-
     }
-
-    .button-one:hover {
-        background: black;
-        color: white;
+    #botao-filtros {
+        right: 210px;
     }
+}
 
-    .div-flex {
-        display: flex;
-        gap: 5%;
-        align-items: center;
+/* --- Telas de Celular Pequeno (até 480px) --- */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
     }
-
-    .search-box {
-        width: 700px;
-        display: flex;
-        padding: 1%;
-        border-radius: 20px;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        border: 1px solid #e5e7eb;
-        justify-content: space-between;
+    .principal {
+        padding: 10px;
     }
-
-    .search-box input {
-        width: 100%;
-        border: none;
-        outline: none;
-        background: rgb(255, 255, 255);
+    .navegation {
+        gap: 10px;
     }
-
-    .search-box button {
-       width: auto;
-       background: white;
-       border-style: none;
+    .titulo-one {
+        font-size: 1.3rem;
     }
-
-    /*Configuração do botão e painel filtro*/
-
-    .filter-btn {
-        width: 100%;
-        max-width: 100px;
-        min-width: 100px;
-        display: flex;
-        align-items: center;
-        background: rgb(0, 89, 253);
-        color: white;
-        padding: 1%;
-        border: none;
-        border-radius: 15px;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-
-    .filter-btn:hover {
-        background: black;
-    }
-
-/* Painel de filtros escondido por padrão */
-    .filter-panel {
-        position: fixed;
-        top: 0;
-        right: -300px; 
-        width: 200px;
-        height: 100vh;
-        background: white;
-        box-shadow: -2px 0 6px rgba(0,0,0,0.2);
-        padding: 2%;
-        transition: right 0.3s ease-in-out;
-        overflow-y: auto;
-        z-index: 2000;
-        text-align: center;
-    }
-
-    .filter-panel h3 {
-        text-align: left;
-    }
-
-/* Ativo (visível) */
-    .filter-panel.active {
-        right: 0;
-        position: fixed;
-    }
-
-    .filter-panel-container {
-        font-size: 80%;
-    }
-
-    .opcao-bairro {
-        display: flex;
-    }
-
-    /*Configuração do filtro da segunda navbar*/
-
-    .div-two {
-        width: 100%;
-        max-width: 1750px;
-        min-width: 1200px;
-        height: 65vh;
-        background: white;
-        box-sizing: border-box;
-        padding: 3%;
-        gap: 2.5%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        border: 1px solid #e5e7eb;
-        overflow: hidden;
-        overflow-y: auto;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
     .unidade {
-        width: 100%;
-        max-width: 500px;
-        min-width: 450px;
-        height: 100%;
-        max-height: 300px;
-        min-height: 250px;
-        background: white;
-        box-sizing: border-box;
-        padding: 2%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 2%;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        margin-bottom: 2%;
+        min-height: auto;
     }
+    .filter-panel {
+        width: 240px;
+    }
+    #botao-filtros {
+        right: 210px;
+    }
+}
 
+/* --- Telas MUITO PEQUENAS (até 320px) --- */
+@media (max-width: 320px) {
+    html {
+        font-size: 13px; /* Reduz ainda mais a fonte base */
+    }
+    .navegation {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+    .principal {
+        margin-top: 180px; /* Mais espaço para o cabeçalho maior */
+        padding: 5px;
+    }
+    .nav-one, .div-two {
+        padding: 10px;
+    }
+    .filter-panel {
+        /* Ocupa quase toda a tela, mas deixa uma margem */
+        max-width: calc(100% - 20px); 
+    }
     .unidade a {
-        text-decoration: none;
-        color: black;
-        background: rgb(224, 224, 224);
-        padding: 4% 4%;
-        box-shadow: 0 1px 6px rgba(0,0,0, 0.16);
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
+       width: 100%;
+       text-align: center;
     }
-
-    .unidade h3 {
-        width: 100%;
-        color: rgb(0, 102, 255);
+    #botao-filtros {
+        right: 210px;
     }
-
-    .unidade p {
-        width: 100%;
-    }
-
-    .tipo-unidade {
-        margin-top: 6px;
-        font-weight: bold;
-        color: #2c3e50; 
-        font-size: 0.95rem; 
-        
-    }
-
-    .icones {
-        font-size: 1.2em;
-        color: gray;
-    }
-
-    .icones-one {
-        font-size: 1.2em;
-    }
-
-    /*Configuração do rodpé*/
-
-    .footer-one {
-        width: 100%;
-        min-width: 100%;
-        height: 100%;
-        min-height: 50px;
-        color: white;
-        background: rgb(0, 0, 48);
-        clear: both;
-        display: flex;
-        align-items: center;
-        justify-content: center; 
-        z-index: 10;          
-    }
-
-
-
+}
