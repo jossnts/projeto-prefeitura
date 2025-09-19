@@ -60,6 +60,8 @@ body {
 }
 
 .titulo-one {
+    display: flex;
+    justify-content: center;
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
@@ -352,4 +354,5 @@ body {
     #botao-filtros {
         right: 210px;
     }
+
 }
