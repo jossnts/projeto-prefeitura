@@ -1,206 +1,128 @@
 
-  const filterBtn = document.querySelectorAll(".filter-btn");
-  const filterPanel = document.querySelector(".filter-panel");
+const filterBtn = document.querySelectorAll(".filter-btn");
+const filterPanel = document.querySelector(".filter-panel");
 
-  filterBtn.forEach(filtro => {
-
-  filtro.addEventListener("click", () => {
-    filterPanel.classList.toggle("active");
-  });
-})
+filterBtn.forEach(filtro => {
+    filtro.addEventListener("click", () => {
+        filterPanel.classList.toggle("active");
+    });
+});
 
 function removerAcentos(texto) {
-  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function search() {
-  let botaoPesquisa = document.querySelector("#pesquisar") //pega o botao pesquisar
-  let dados = document.querySelectorAll(".unidade") //pega todas as unidades em uma lista
+// =================================================================
+// INÍCIO DA LÓGICA DE FILTRO UNIFICADA
+// =================================================================
 
-  botaoPesquisa.addEventListener("input", function () { //adiciona um evento de input(dispara quando o value dentro do botao muda)
+function configurarFiltros() {
+    // Adiciona o "escutador de eventos" para cada tipo de filtro
+    document.querySelector("#pesquisar").addEventListener("input", aplicarFiltros);
+    document.querySelectorAll("input[name='regiao']").forEach(el => el.addEventListener('change', aplicarFiltros));
+    document.querySelectorAll("input[name='bairros']").forEach(el => el.addEventListener('change', aplicarFiltros));
+    document.querySelectorAll("input[name='unidades']").forEach(el => el.addEventListener('change', aplicarFiltros));
+}
 
-  dados.forEach(dado => { //passa por todas as unidades, uma por uma, significa que dado, é 1 unidade
+function aplicarFiltros() {
+    // 1. PEGA OS VALORES DE TODOS OS FILTROS ATIVOS
+    
+    // Filtro de Pesquisa (Texto)
+    const termoPesquisa = removerAcentos(document.querySelector("#pesquisar").value.toLowerCase());
 
-      let pesquisaMinusculo = removerAcentos(botaoPesquisa.value.toLowerCase()) //deixa todo o valor dentro da pesquisa em minusculo e remove acentos
-      let dadosMinusculo = removerAcentos(dado.textContent.toLowerCase()) //deixa todo o texto das unidades em minusculo e remove acentos 
-      console.log(`Buscando por "${pesquisaMinusculo}" dentro de "${dadosMinusculo}"`) //testando pra ver se ta rodando
-
-     if (dadosMinusculo.includes(pesquisaMinusculo)) { //SE A UNIDADE CONTEM O VALOR QUE ESTÁ DENTRO DA PESQUISA, APARECE ou se no livro(dadosMinusculo) contém o que foi digitado em (pesquisaMinusculo)
-      dado.style.display = "flex"
+    // Filtro de Região
+    let regiaoSelecionada = "todos"; // Valor padrão
+    const regiaoChecada = document.querySelector("input[name='regiao']:checked");
+    if (regiaoChecada) {
+        regiaoSelecionada = regiaoChecada.value;
     }
-    
-    else { //SE NÃO CONTÉM SOME 
-      dado.style.display = "none"
-    }}
-   
-  )}
-)}
 
-function regiaoSetup() {
-  let regioes = document.querySelectorAll("input[name='regiao']")
+    // Filtro de Bairro
+    let bairroSelecionado = "todos"; // Valor padrão
+    const bairroChecado = document.querySelector("input[name='bairros']:checked");
+    if (bairroChecado) {
+        bairroSelecionado = bairroChecado.value;
+    }
 
-  regioes.forEach(regiao1 => {
-    regiao1.addEventListener('change', regiao)
-  })
+    // Filtro de Tipo de Unidade
+    let tipoUnidadeSelecionado = "todos"; // Valor padrão
+    const tipoUnidadeChecado = document.querySelector("input[name='unidades']:checked");
+    if (tipoUnidadeChecado) {
+        tipoUnidadeSelecionado = tipoUnidadeChecado.value;
+    }
+
+    // 2. PASSA POR CADA UNIDADE E APLICA TODAS AS REGRAS
+    const todasAsUnidades = document.querySelectorAll(".unidade");
+
+    todasAsUnidades.forEach(unidade => {
+        // Começamos assumindo que a unidade deve ser mostrada
+        let mostrar = true; 
+
+        // --- Verificação da Pesquisa ---
+        const textoDaUnidade = removerAcentos(unidade.textContent.toLowerCase());
+        if (!textoDaUnidade.includes(termoPesquisa)) {
+            mostrar = false; // Se não corresponde à pesquisa, não mostra
+        }
+
+        // --- Verificação da Região ---
+        // Só aplica o filtro se uma região específica (diferente de "todos") foi selecionada
+        if (regiaoSelecionada !== "todos" && !unidade.classList.contains(regiaoSelecionada)) {
+            mostrar = false; // Se a unidade não tem a classe da região, não mostra
+        }
+
+        // --- Verificação do Bairro ---
+        if (bairroSelecionado !== "todos" && !unidade.classList.contains(bairroSelecionado)) {
+            mostrar = false; // Se a unidade não tem a classe do bairro, não mostra
+        }
+
+        // --- Verificação do Tipo de Unidade ---
+        const paragrafoTipo = unidade.querySelector(".tipo-unidade");
+        if (paragrafoTipo && tipoUnidadeSelecionado !== "todos") {
+            const tipoDaUnidade = paragrafoTipo.dataset.value;
+            if (tipoDaUnidade !== tipoUnidadeSelecionado) {
+                mostrar = false; // Se o data-value não for igual ao selecionado, não mostra
+            }
+        }
+        
+        // 3. DECISÃO FINAL: MOSTRAR OU ESCONDER A UNIDADE
+        // A unidade só será exibida se a variável 'mostrar' continuou 'true' após passar por todos os 'if's
+        if (mostrar) {
+            unidade.style.display = "flex";
+        } else {
+            unidade.style.display = "none";
+        }
+    });
 }
 
-regiaoSetup()
-function regiao() {
-    
-  let regioes = document.querySelectorAll("input[name='regiao']")
-
-  let regiaoSelecionada = ''
-
-  let unidades = document.querySelectorAll(".unidade")
-
-    regioes.forEach(regiao => {
-
-      if(regiao.checked) {
-        regiaoSelecionada = regiao.value
-      }
-    })
-    
-
-    unidades.forEach(unidade => {
-
-      if (regiaoSelecionada == "todos") {
-        unidade.style.display = "flex"
-      }
-      else if (unidade.classList.contains(regiaoSelecionada)) {
-          unidade.style.display = "flex"
-      }
-      else {
-        unidade.style.display = "none"
-      }
-    })
-}
+// Inicia a configuração dos filtros quando a página carrega
+configurarFiltros();
 
 
+// =================================================================
+// FIM DA LÓGICA DE FILTRO UNIFICADA
+// =================================================================
 
 
-function bairroSetup() {
-   let bairros1 = document.querySelectorAll("input[name='bairros']")
-
-   bairros1.forEach(bairro => {
-    bairro.addEventListener('change', bairros)
-})}
-  
-
-
-bairroSetup() 
-function bairros() {
-
-  let bairros = document.querySelectorAll("input[name='bairros']")
-
-  let bairroSelecionado = ''
-
-  let unidades = document.querySelectorAll(".unidade")
-
-    bairros.forEach(bairro => {
-
-      if(bairro.checked) {
-        bairroSelecionado = bairro.value
-      }
-    })
-    
-
-    unidades.forEach(unidade => {
-      if (unidade.classList.contains(bairroSelecionado)) {
-          unidade.style.display = "flex"
-      }
-      else {
-        unidade.style.display = "none"
-      }
-    })
-}
-
+// Esta função é para a interface (filtrar as opções de bairro) e pode continuar existindo!
 function regiaoBairroSetup() {
-   let regioes = document.querySelectorAll("input[name='regiao']")
-
+    let regioes = document.querySelectorAll("input[name='regiao']")
     regioes.forEach(regiao => {
-      regiao.addEventListener('change', regiaoBairro)
-    }
-  )}
+        regiao.addEventListener('change', regiaoBairro)
+    })
+}
 
-regiaoBairroSetup()
 function regiaoBairro() {
-  let regioes = document.querySelectorAll("input[name='regiao']")
-  let regiaoSelecionada = ''
+    let regiaoSelecionada = document.querySelector("input[name='regiao']:checked").value;
+    const todosOsBairros = document.querySelectorAll(".opcao-bairro");
 
-  regioes.forEach(regiao => {
-    if(regiao.checked) {
-      regiaoSelecionada = regiao.value
-    }
-  })
-
-  const todosOsBairros = document.querySelectorAll(".opcao-bairro")
-
-  todosOsBairros.forEach(containerDoBairro => {
-
-    if (regiaoSelecionada === "todos") {
-      containerDoBairro.style.display = "flex"
-    }
-    else if (containerDoBairro.dataset.regiao === regiaoSelecionada) {
-      containerDoBairro.style.display = "flex"
-    }
-    else {
-      containerDoBairro.style.display = "none"
-    }
-  })} 
-
-function unidadeCaisSetup() {
- let tipoDeUnidade = document.querySelectorAll("input[name='unidades']")
-
-  tipoDeUnidade.forEach(unidades => {
-    unidades.addEventListener("change", unidadeCais)
-  })
-} 
-
-unidadeCaisSetup()
-
-  function unidadeCais() {
-    let unidades = document.querySelectorAll(".unidade") //dataset-value 
-    let tipoDeUnidade = document.querySelectorAll("input[name='unidades']") //value
-    let tipoUnidadeSelecionado = ''
-
-    tipoDeUnidade.forEach(Tipounidade => {
-      if(Tipounidade.checked) {
-        tipoUnidadeSelecionado = Tipounidade.value
-      }
-
-      console.log(tipoUnidadeSelecionado)
-    })  
-
-    unidades.forEach(unidadeIndividual => {
-
-      let paragrafoInterno = unidadeIndividual.querySelector(".tipo-unidade")
-
-      if (paragrafoInterno) { 
-
-        let paragrafoValue = paragrafoInterno.dataset.value
-
-      if (paragrafoValue == tipoUnidadeSelecionado) {
-
-        unidadeIndividual.style.display = "flex"
-      }
-      else {
-        unidadeIndividual.style.display = "none"
-      }
-
-      console.log(paragrafoValue)
-    }})
-  }
-      
-    
+    todosOsBairros.forEach(containerDoBairro => {
+        if (regiaoSelecionada === "todos" || containerDoBairro.dataset.regiao === regiaoSelecionada) {
+            containerDoBairro.style.display = "flex";
+        } else {
+            containerDoBairro.style.display = "none";
+        }
+    });
+}
 
 
-
-
-  //se a pessoa escolher central, nos bairros vai aparecer os bairros central, mas para acontecer isso precisa de DOM, se regiao for central, ele vai manipular a div que contém todos os bairros, e só vai mostrar os que tiver o valor central document.getelementbyid(divbairro), for each, if valor de regiao for igual a valor de bairro, os que nao tiverem some
-
-
-  //se o valor de label for igual ao valor selecionado, aparece, se nao some
-
-
-   
-
+regiaoBairroSetup();

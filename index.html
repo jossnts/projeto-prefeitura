@@ -12,16 +12,15 @@
     <header>
         <nav class ="navegation">
             <div class="logo">
-                <img src="">
+                <img src="imagens/transferir.png">
             </div>
-            <p><span>e-SUS APS</span></p>
-            <p>Ministério da Saúde</p>
+            <p style="display: flex; text-align: center;"><span>SECRETARIA MUNICIPAL DE SAÚDE PMPF</span></p>
         </nav>
     </header>
     <main class="principal">
         <section class="section-one">
             <div class="container">
-                <span class="titulo-one">Sistema de Pesquisa de Unidades de Saúde</span>
+                                <span class="titulo-one"> Pesquisa de Unidades de Saúde</span>
                 <div class="nav-one">
                     <article class="nav-one-flex">
                             <div class="search-box">
@@ -45,51 +44,33 @@
 
                                 <div class="filter-panel-container">
 
-                            
-                                <div class="opcao-regiao">
-                                <h3>Região</h3><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="todos"> Todos
-                                </label><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="central"> Central
-                                </label><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="norte"> Norte
-                                </label><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="noroeste"> Noroeste
-                                </label><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="leste"> Leste
-                                </label><br>
-                                 <label>
-                                    <input type="radio" name="regiao" value="sudeste"> Sudeste
-                                </label><br>
-                                <label>
-                                    <input type="radio" name="regiao" value="sul"> Sul
-                                </label><br>
-                                
-                                <label>
-                                    <input type="radio" name="regiao" value="sudoeste"> Sudoeste
-                                </label><br>
-                                
-                                <label>
-                                    <input type="radio" name="regiao" value="oeste"> Oeste
-                                </label><br>
+                                      <div class="tipo-unidades">
+                                <h3>Unidades</h3><br>
 
                                 <label>
-                                
-                                
-                                    <input type="radio" name="regiao" value="interior"> Zonas Afastadas e Interior
+                                    <input type="radio" name="unidades" value="todos"> Todos
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="unidades" value="UBS"> Unidades Básicas de Saúde
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="unidades" value="CAIS"> Cais
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="unidades" value="interior"> Ambulatórios
                                 </label><br>
                                 </div>
-                                <br>
+                               <br>
                                 <hr>
-                                <br>
+                                
                                 <div id="bairros">
+                                    <br>
+    <h3>Bairros</h3>    
 
-    <h3>Bairros</h3>
+    <div class="opcao-bairro" data-regiao="todos">
+        <input type="radio" name="bairros" value="todos" id="todos">
+        <label for="todos"> Todos</label>
+    </div>
 
     <div class="opcao-bairro" data-regiao="norte">
         <input type="radio" name="bairros" value="1º-centenario" id="bairro-1-centenario">
@@ -249,24 +230,50 @@
                                 <br>
                                 <hr>
                                 <br>
-                                <div class="tipo-unidades">
-                                <h3>Unidades</h3><br>
+                                <div class="opcao-regiao">
+                                <h3>Região</h3><br>
                                 <label>
-                                    <input type="radio" name="unidades" value="UBS"> Unidades Básicas de Saúde
+                                    <input type="radio" name="regiao" value="todos"> Todos
                                 </label><br>
                                 <label>
-                                    <input type="radio" name="unidades" value="CAIS"> Cais
+                                    <input type="radio" name="regiao" value="central"> Central
                                 </label><br>
                                 <label>
-                                    <input type="radio" name="unidades" value="UBS"> Ambulatórios
+                                    <input type="radio" name="regiao" value="norte"> Norte
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="regiao" value="noroeste"> Noroeste
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="regiao" value="leste"> Leste
+                                </label><br>
+                                 <label>
+                                    <input type="radio" name="regiao" value="sudeste"> Sudeste
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="regiao" value="sul"> Sul
+                                </label><br>
+                                
+                                <label>
+                                    <input type="radio" name="regiao" value="sudoeste"> Sudoeste
+                                </label><br>
+                                
+                                <label>
+                                    <input type="radio" name="regiao" value="oeste"> Oeste
+                                </label><br>
+
+                                <label>
+                                
+                                
+                                    <input type="radio" name="regiao" value="interior"> Zonas Afastadas e Interior
                                 </label><br>
                                 </div>
-                                </div>
+                                <br>
+                                <hr>
+                                <br>
+                              
                             </div>
-                            <button class="button-one">
-                                Use sua localicalização atual
-                                <i class="fa-solid fa-location-dot icones-one"></i>
-                            </button>
+                           
                     </article>
                     <p>
                         Clique nos ícones acima para filtrar ou pesquisar unidades, centros, ou setores da saúde
@@ -604,35 +611,35 @@
                         <h3>Ambulatório Bela Vista</h3>
                         <p>Localidade: Bela Vista – Interior</p>
                         <a href="https://maps.app.goo.gl/nKAzHQp4zWAu2zycA">📍Mapa</a>
-                        <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade interior">
                         <h3>Ambulatório Capinzal</h3>
                         <p>Localidade: Capinzal – Interior</p>
                         <a href="https://maps.app.goo.gl/nKAzHQp4zWAu2zycA">📍Mapa</a>
-                        <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade interior">
                         <h3>Ambulatório São Valentim / São Roque</h3>
                         <p>Localidade: São Valentim / São Roque – Interior</p>
                         <a href="https://maps.app.goo.gl/nKAzHQp4zWAu2zycA">📍Mapa</a>
-                        <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade interior">
                         <h3>Ambulatório Pulador</h3>
                         <p>Localidade: Pulador – Interior</p>
                         <a href="https://maps.app.goo.gl/YSEmjg9yKGPje2f66">📍Mapa</a>
-                        <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade interior">
                         <h3>Ambulatório Sede Independência</h3>
                         <p>Localidade: Sede Independência – Interior</p>
                         <a href="https://maps.app.goo.gl/nKAzHQp4zWAu2zycA">📍Mapa</a>
-                        <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade oeste cohab">
@@ -702,7 +709,7 @@
                         <a href="">📞(54) 3315-5585 / (54) 99149-4252</a>
                         <a href="https://wa.me/5554991494252">👥Whatsapp</a>
                         <a>✉️qualidadedevidapf@gmail.com</a>
-                        <p class="tipo-unidade">⛑️Setor</p>
+                        <p class="tipo-unidade" data-value="interior">⛑️Ambulatório</p>
                     </div>
 
                     <div class="unidade">

@@ -32,11 +32,11 @@ body {
 }
 
 .navegation span {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .logo img {
-    width: 100px;
+    width: 180px;
     height: auto;
 }
 
@@ -63,7 +63,7 @@ body {
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 20px;
 }
 
@@ -120,7 +120,7 @@ body {
     cursor: pointer;
 }
 
-.filter-btn, .button-one {
+.filter-btn {
     background: rgb(0, 89, 253);
     color: white;
     padding: 12px 20px;
@@ -135,7 +135,7 @@ body {
     white-space: nowrap;
 }
 
-.filter-btn:hover, .button-one:hover {
+.filter-btn:hover{
     background: black;
 }
 
@@ -167,6 +167,12 @@ body {
     padding: 8px 12px;
 }
 
+#bairros {
+    overflow: hidden;
+    max-height: 230px;
+    overflow-y: auto;
+}
+
 
 .filter-panel h3 {
     text-align: left;
@@ -186,6 +192,7 @@ body {
     align-items: center;
     gap: 5px;
 }
+
 
 /* --- Container das Unidades --- */
 .div-two {
@@ -270,15 +277,19 @@ body {
 /* ############### MEDIA QUERIES ################# */
 /* ############################################### */
 
+
+@media (max-width: 788px) {
+    .logo img {
+        display: none;
+    }
+}
 /* --- Telas de Tablet (até 768px) --- */
 @media (max-width: 768px) {
     .principal {
         padding: 15px;
         margin-top: 130px;
     }
-    .navegation span {
-        font-size: 2rem;
-    }
+
     .titulo-one {
         font-size: 1.5rem;
     }
@@ -293,7 +304,7 @@ body {
         flex-direction: column; 
         gap: 15px;
     }
-    .search-box, .button-one {
+    .search-box {
         width: 100%;
     }
     #botao-filtros {
@@ -354,5 +365,4 @@ body {
     #botao-filtros {
         right: 210px;
     }
-
 }
