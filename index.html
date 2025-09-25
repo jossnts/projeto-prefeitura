@@ -41,6 +41,10 @@
     <button class="filter-btn" id="botao-filtros">
                                <i class="fa-solid fa-arrow-left"></i>
                             </button>
+                            
+                            <button type="button" id="limpar-filtros-btn" class="limpar-filtros">
+        Limpar Filtros
+    </button>
 
                                 <div class="filter-panel-container">
 
@@ -48,7 +52,7 @@
                                 <h3>Unidades</h3><br>
 
                                 <label>
-                                    <input type="radio" name="unidades" value="todos"> Todos
+                                    <input type="radio" name="unidades" value="todos" checked> Todos
                                 </label><br>
                                 <label>
                                     <input type="radio" name="unidades" value="UBS"> Unidades Básicas de Saúde
@@ -68,159 +72,183 @@
     <h3>Bairros</h3>    
 
     <div class="opcao-bairro" data-regiao="todos">
-        <input type="radio" name="bairros" value="todos" id="todos">
+        <input type="radio" name="bairros" value="todos" id="todos" checked>
         <label for="todos"> Todos</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="norte">
+    <div class="opcao-bairro" data-regiao="norte" data-unidade="UBS">
         <input type="radio" name="bairros" value="1º-centenario" id="bairro-1-centenario">
         <label for="bairro-1-centenario">1º Centenario</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="central">
+    <div class="opcao-bairro" data-regiao="central" data-unidade="UBS">
         <input type="radio" name="bairros" value="annes" id="bairro-annes">
         <label for="bairro-annes">Annes</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sul">
+    <div class="opcao-bairro" data-regiao="sul" data-unidade="UBS">
         <input type="radio" name="bairros" value="bom-jesus" id="bairro-bom-jesus">
         <label for="bairro-bom-jesus">Bom Jesus</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
-        <input type="radio" name="bairros" value="cohab" id="bairro-cohab">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
+        <input type="radio" name="bairros" value="cohab2" id="bairro-cohab">
         <label for="bairro-cohab">Cohab II // Secchi</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="donaria" id="bairro-donaria">
         <label for="bairro-donaria">Donária</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="leste">
+    <div class="opcao-bairro" data-regiao="oeste" data-unidade="CAIS">
+        <input type="radio" name="bairros" value="cohab" id="bairro-edmundo-trein">
+        <label for="bairro-edmundo-trein">Edmundo Trein</label>
+    </div>
+
+    <div class="opcao-bairro" data-regiao="leste" data-unidade="UBS">
         <input type="radio" name="bairros" value="entre-rios" id="bairro-entre-rios">
         <label for="bairro-entre-rios">Entre Rios</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="central">
+    <div class="opcao-bairro" data-regiao="central" data-unidade="UBS">
         <input type="radio" name="bairros" value="fatima" id="bairro-fatima">
         <label for="bairro-fatima">Fátima</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="noroeste">
+    <div class="opcao-bairro" data-regiao="norte" data-unidade="CAIS" data-unidade="UBS">
+        <input type="radio" name="bairros" value="hipica" id="bairro-hipica">
+        <label for="bairro-hipica">Hípica</label>
+    </div>
+
+    <div class="opcao-bairro" data-regiao="noroeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="independente" id="bairro-independente">
         <label for="bairro-independente">Independente</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="interior">
+    <div class="opcao-bairro" data-regiao="interior" data-unidade="interior">
         <input type="radio" name="bairros" value="interior" id="bairro-interior">
         <label for="bairro-interior">Interior</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="oeste">
+    <div class="opcao-bairro" data-regiao="oeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="jaboticabal" id="bairro-jaboticabal">
         <label for="bairro-jaboticabal">Jaboticabal</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="jardim-america" id="bairro-jardim-america">
         <label for="bairro-jardim-america">Jardim América</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="oeste">
+    <div class="opcao-bairro" data-regiao="oeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="jeronimo-coelho" id="bairro-jeronimo-coelho">
         <label for="bairro-jeronimo-coelho">Jerônimo Coelho</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="oeste">
+    <div class="opcao-bairro" data-regiao="central" data-unidade="CAIS">
+        <input type="radio" name="bairros" value="sao-cristovao" id="bairro-araujo">
+        <label for="bairro-araujo">Lucas Araújo</label>
+    </div>
+
+    <div class="opcao-bairro" data-regiao="oeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="schisler" id="bairro-schisler">
         <label for="bairro-schisler">Lot. Prof Schisler</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sul">
+    <div class="opcao-bairro" data-regiao="sul" data-unidade="UBS">
         <input type="radio" name="bairros" value="mattos" id="bairro-mattos">
         <label for="bairro-mattos">Mattos</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="menino-deus" id="bairro-menino-deus">
         <label for="bairro-menino-deus">Menino Deus</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="oeste">
+    <div class="opcao-bairro" data-regiao="oeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="aparecida" id="bairro-aparecida">
         <label for="bairro-aparecida">N.Sª Aparecida</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="nene-graeff" id="bairro-nene-graeff">
         <label for="bairro-nene-graeff">Nene Graeff</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="central">
+    <div class="opcao-bairro" data-regiao="central" data-unidade="UBS">
         <input type="radio" name="bairros" value="operaria" id="bairro-operaria">
         <label for="bairro-operaria">Operária</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudeste">
+    <div class="opcao-bairro" data-regiao="sudeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="parque-farroupilha" id="bairro-parque-farroupilha">
         <label for="bairro-parque-farroupilha">Parque Farroupilha</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="leste">
+    <div class="opcao-bairro" data-regiao="leste" data-unidade="CAIS">
         <input type="radio" name="bairros" value="petropolis" id="bairro-petropolis">
         <label for="bairro-petropolis">Petrópolis</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sul">
+    <div class="opcao-bairro" data-regiao="sul" data-unidade="UBS">
         <input type="radio" name="bairros" value="planaltina" id="bairro-planaltina">
         <label for="bairro-planaltina">Planaltina</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sul">
+    <div class="opcao-bairro" data-regiao="sul" data-unidade="UBS">
         <input type="radio" name="bairros" value="ricci" id="bairro-ricci">
         <label for="bairro-ricci">Ricci</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudoeste">
+    <div class="opcao-bairro" data-regiao="sudoeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="santa-rita" id="bairro-santa-rita">
         <label for="bairro-santa-rita">Santa Rita</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sul">
+    <div class="opcao-bairro" data-regiao="sul" data-unidade="UBS">
         <input type="radio" name="bairros" value="sao-cristovao" id="bairro-sao-cristovao">
         <label for="bairro-sao-cristovao">São Cristovão</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="leste">
+    <div class="opcao-bairro" data-regiao="leste" data-unidade="UBS">
         <input type="radio" name="bairros" value="sao-jose" id="bairro-sao-jose">
         <label for="bairro-sao-jose">São José</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudeste">
+    <div class="opcao-bairro" data-regiao="sudeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="sao-luiz" id="bairro-sao-luiz">
         <label for="bairro-sao-luiz">São Luiz Gonzaga</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="norte">
+    <div class="opcao-bairro" data-regiao="norte" data-unidade="UBS">
         <input type="radio" name="bairros" value="valinhos" id="bairro-valinhos">
         <label for="bairro-valinhos">Valinhos</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="norte">
+    <div class="opcao-bairro" data-regiao="norte" data-unidade="UBS">
         <input type="radio" name="bairros" value="vera-cruz" id="bairro-vera-cruz">
         <label for="bairro-vera-cruz">Vera Cruz</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="sudeste">
+    <div class="opcao-bairro" data-regiao="central" data-unidade="CAIS">
+        <input type="radio" name="bairros" value="vila-luiza" id="bairro-vila-luiza">
+        <label for="bairro-vila-luiza">Vila Luiza</label>
+    </div>
+
+    <div class="opcao-bairro" data-regiao="sudeste" data-unidade="UBS">
         <input type="radio" name="bairros" value="vila-nova" id="bairro-vila-nova">
         <label for="bairro-vila-nova">Vila Nova</label>
     </div>
 
-    <div class="opcao-bairro" data-regiao="norte">
+    <div class="opcao-bairro" data-regiao="norte" data-unidade="UBS">
         <input type="radio" name="bairros" value="zachia" id="bairro-zachia">
         <label for="bairro-zachia">Zachia</label>
     </div>
+
+    <p id="mensagem-sem-bairros" class="mensagem-aviso" style="display: none;">
+        Nenhum bairro disponível para esta seleção.
+    </p>
 
 </div>
 
@@ -233,7 +261,7 @@
                                 <div class="opcao-regiao">
                                 <h3>Região</h3><br>
                                 <label>
-                                    <input type="radio" name="regiao" value="todos"> Todos
+                                    <input type="radio" name="regiao" value="todos" checked> Todos
                                 </label><br>
                                 <label>
                                     <input type="radio" name="regiao" value="central"> Central
@@ -269,8 +297,9 @@
                                 </label><br>
                                 </div>
                                 <br>
-                                <hr>
-                                <br>
+                                <br><br>
+
+                                
                               
                             </div>
                            
@@ -321,7 +350,7 @@
                         <p class="tipo-unidade" data-value="UBS">🏥Unidade Básica de Saúde</p>
                     </div>
 
-                    <div class="unidade sudoeste cohab">
+                    <div class="unidade sudoeste cohab2">
                         <h3>UBS CAIC</h3>
                         <p>Endereço: Niva Bilhar, nº 76, Cohab II / Secchi</p>
                         <a href="https://maps.app.goo.gl/zuDncnSNFT6VrXns5">📍Mapa</a>
@@ -815,6 +844,10 @@
                         <a>✉️manutencao.sms@pmpf.rs.gov.br</a>
                         <p class="tipo-unidade">⛑️Setor</p>
                     </div>
+
+                    <p id="mensagem-sem-unidades" class="mensagem-aviso" style="display: none;">
+        Nenhuma unidade encontrada com os filtros aplicados.
+    </p>
 
                 </div>
             </div>

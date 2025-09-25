@@ -14,6 +14,14 @@ body {
     background-color: #f4f4f4;
 }
 
+.mensagem-aviso {
+    color: #555;
+    padding: 20px;
+    text-align: center;
+    font-style: italic;
+    width: 100%; /* Para ocupar o espaço todo */
+}
+
 /* --- Configuração do Cabeçalho --- */
 .navegation {
     width: 100%;
@@ -164,6 +172,25 @@ body {
     z-index: 2002;
     top: 10px;
     right: 250px; 
+    padding: 8px 12px;
+}
+
+#limpar-filtros-btn {
+    background: rgb(0, 89, 253);
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 2002;
+    top: 10px;
+    right: 10px; 
     padding: 8px 12px;
 }
 

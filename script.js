@@ -1,4 +1,3 @@
-
 const filterBtn = document.querySelectorAll(".filter-btn");
 const filterPanel = document.querySelector(".filter-panel");
 
@@ -13,116 +12,167 @@ function removerAcentos(texto) {
 }
 
 // =================================================================
-// INÍCIO DA LÓGICA DE FILTRO UNIFICADA
+// LÓGICA PARA FILTRAR OS RESULTADOS (.unidade)
+// (Esta parte já estava correta)
 // =================================================================
 
-function configurarFiltros() {
-    // Adiciona o "escutador de eventos" para cada tipo de filtro
-    document.querySelector("#pesquisar").addEventListener("input", aplicarFiltros);
-    document.querySelectorAll("input[name='regiao']").forEach(el => el.addEventListener('change', aplicarFiltros));
-    document.querySelectorAll("input[name='bairros']").forEach(el => el.addEventListener('change', aplicarFiltros));
-    document.querySelectorAll("input[name='unidades']").forEach(el => el.addEventListener('change', aplicarFiltros));
-}
-
 function aplicarFiltros() {
-    // 1. PEGA OS VALORES DE TODOS OS FILTROS ATIVOS
-    
-    // Filtro de Pesquisa (Texto)
+    // 1. Pega os valores de todos os filtros de resultado
     const termoPesquisa = removerAcentos(document.querySelector("#pesquisar").value.toLowerCase());
-
-    // Filtro de Região
-    let regiaoSelecionada = "todos"; // Valor padrão
     const regiaoChecada = document.querySelector("input[name='regiao']:checked");
-    if (regiaoChecada) {
-        regiaoSelecionada = regiaoChecada.value;
-    }
-
-    // Filtro de Bairro
-    let bairroSelecionado = "todos"; // Valor padrão
     const bairroChecado = document.querySelector("input[name='bairros']:checked");
-    if (bairroChecado) {
-        bairroSelecionado = bairroChecado.value;
-    }
-
-    // Filtro de Tipo de Unidade
-    let tipoUnidadeSelecionado = "todos"; // Valor padrão
     const tipoUnidadeChecado = document.querySelector("input[name='unidades']:checked");
-    if (tipoUnidadeChecado) {
-        tipoUnidadeSelecionado = tipoUnidadeChecado.value;
-    }
 
-    // 2. PASSA POR CADA UNIDADE E APLICA TODAS AS REGRAS
+    const regiaoSelecionada = regiaoChecada ? regiaoChecada.value : "todos";
+    const bairroSelecionado = bairroChecado ? bairroChecado.value : "todos";
+    const tipoUnidadeSelecionado = tipoUnidadeChecado ? tipoUnidadeChecado.value : "todos";
+
+    // 2. Passa por cada unidade e aplica as regras
     const todasAsUnidades = document.querySelectorAll(".unidade");
 
-    todasAsUnidades.forEach(unidade => {
-        // Começamos assumindo que a unidade deve ser mostrada
-        let mostrar = true; 
+    //Inicia um contador para as unidades visíveis
+    let unidadesVisiveis = 0;
 
-        // --- Verificação da Pesquisa ---
+    todasAsUnidades.forEach(unidade => {
+        let mostrar = true;
+
+        // Verificação da Pesquisa
         const textoDaUnidade = removerAcentos(unidade.textContent.toLowerCase());
         if (!textoDaUnidade.includes(termoPesquisa)) {
-            mostrar = false; // Se não corresponde à pesquisa, não mostra
+            mostrar = false;
         }
 
-        // --- Verificação da Região ---
-        // Só aplica o filtro se uma região específica (diferente de "todos") foi selecionada
+        // Verificação da Região
         if (regiaoSelecionada !== "todos" && !unidade.classList.contains(regiaoSelecionada)) {
-            mostrar = false; // Se a unidade não tem a classe da região, não mostra
+            mostrar = false;
         }
 
-        // --- Verificação do Bairro ---
+        // Verificação do Bairro
         if (bairroSelecionado !== "todos" && !unidade.classList.contains(bairroSelecionado)) {
-            mostrar = false; // Se a unidade não tem a classe do bairro, não mostra
+            mostrar = false;
         }
 
-        // --- Verificação do Tipo de Unidade ---
+        // Verificação do Tipo de Unidade
         const paragrafoTipo = unidade.querySelector(".tipo-unidade");
         if (paragrafoTipo && tipoUnidadeSelecionado !== "todos") {
-            const tipoDaUnidade = paragrafoTipo.dataset.value;
-            if (tipoDaUnidade !== tipoUnidadeSelecionado) {
-                mostrar = false; // Se o data-value não for igual ao selecionado, não mostra
+            if (paragrafoTipo.dataset.value !== tipoUnidadeSelecionado) {
+                mostrar = false;
             }
         }
-        
-        // 3. DECISÃO FINAL: MOSTRAR OU ESCONDER A UNIDADE
-        // A unidade só será exibida se a variável 'mostrar' continuou 'true' após passar por todos os 'if's
-        if (mostrar) {
+
+         if (mostrar) {
             unidade.style.display = "flex";
+            unidadesVisiveis++; //  Incrementa o contador se a unidade for mostrada
         } else {
             unidade.style.display = "none";
         }
+        
+        // 3. Decisão Final
+        unidade.style.display = mostrar ? "flex" : "none";
     });
-}
 
-// Inicia a configuração dos filtros quando a página carrega
-configurarFiltros();
+     const mensagemUnidades = document.getElementById('mensagem-sem-unidades');
+    if (unidadesVisiveis === 0) {
+        mensagemUnidades.style.display = 'block'; // Ou 'flex' se preferir
+    } else {
+        mensagemUnidades.style.display = 'none';
+    }
+}
 
 
 // =================================================================
-// FIM DA LÓGICA DE FILTRO UNIFICADA
+// NOVO: LÓGICA UNIFICADA PARA ATUALIZAR A UI DOS FILTROS
+// (Filtra as opções de bairro com base na região E tipo de unidade)
 // =================================================================
 
+function atualizarOpcoesDeBairro() {
+    // 1. Pega os valores dos filtros que afetam a lista de bairros
+    const regiaoChecada = document.querySelector("input[name='regiao']:checked");
+    const tipoUnidadeChecado = document.querySelector("input[name='unidades']:checked");
 
-// Esta função é para a interface (filtrar as opções de bairro) e pode continuar existindo!
-function regiaoBairroSetup() {
-    let regioes = document.querySelectorAll("input[name='regiao']")
-    regioes.forEach(regiao => {
-        regiao.addEventListener('change', regiaoBairro)
-    })
-}
+    const regiaoSelecionada = regiaoChecada ? regiaoChecada.value : "todos";
+    const tipoUnidadeSelecionado = tipoUnidadeChecado ? tipoUnidadeChecado.value : "todos";
 
-function regiaoBairro() {
-    let regiaoSelecionada = document.querySelector("input[name='regiao']:checked").value;
-    const todosOsBairros = document.querySelectorAll(".opcao-bairro");
+    // 2. Passa por cada opção de bairro e aplica as regras
+    const todasAsOpcoesBairro = document.querySelectorAll(".opcao-bairro");
 
-    todosOsBairros.forEach(containerDoBairro => {
-        if (regiaoSelecionada === "todos" || containerDoBairro.dataset.regiao === regiaoSelecionada) {
-            containerDoBairro.style.display = "flex";
-        } else {
-            containerDoBairro.style.display = "none";
+     let bairrosVisiveis = 0;
+    todasAsOpcoesBairro.forEach(opcaoBairro => {
+        let mostrar = true;
+
+        
+        
+        // Verifica a Região
+        // A opção de bairro deve ser mostrada se a região for "todos" OU se o data-regiao da opção for igual à região selecionada.
+        const correspondeRegiao = regiaoSelecionada === "todos" || opcaoBairro.dataset.regiao === regiaoSelecionada;
+
+        // Verifica o Tipo de Unidade
+        // A opção de bairro deve ser mostrada se o tipo for "todos" OU se o data-unidade da opção for igual ao tipo selecionado.
+        const correspondeUnidade = tipoUnidadeSelecionado === "todos" || opcaoBairro.dataset.unidade === tipoUnidadeSelecionado;
+
+        // A opção de bairro só aparece se corresponder A AMBAS as condições
+        if (!correspondeRegiao || !correspondeUnidade) {
+            mostrar = false;
         }
+
+
+         if (mostrar) {
+            opcaoBairro.style.display = 'flex';
+            bairrosVisiveis++; // NOVO: Incrementa o contador
+        } else {
+            opcaoBairro.style.display = 'none';
+        }
+
+        // 3. Decisão Final
+        opcaoBairro.style.display = mostrar ? "flex" : "none";
     });
+
+
+      const mensagemBairros = document.getElementById('mensagem-sem-bairros');
+    if (bairrosVisiveis === 0) {
+        mensagemBairros.style.display = 'block';
+    } else {
+        mensagemBairros.style.display = 'none';
+    }
 }
 
 
-regiaoBairroSetup();
+// =================================================================
+// CONFIGURAÇÃO CENTRALIZADA DOS EVENTOS
+// =================================================================
+
+function configurarTodosOsFiltros() {
+
+    document.querySelector("input[name='regiao'][value='todos']").checked = true;
+    document.querySelector("input[name='bairros'][value='todos']").checked = true;
+    document.querySelector("input[name='unidades'][value='todos']").checked = true;
+
+    document.getElementById('limpar-filtros-btn').addEventListener('click', limparFiltros);
+    // Filtros que afetam APENAS os resultados
+    document.querySelector("#pesquisar").addEventListener("input", aplicarFiltros);
+    document.querySelectorAll("input[name='bairros']").forEach(el => el.addEventListener('change', aplicarFiltros));
+
+    // Filtros que afetam os resultados E a UI de outros filtros
+    document.querySelectorAll("input[name='regiao']").forEach(el => el.addEventListener('change', () => {
+        aplicarFiltros(); // Atualiza os resultados
+        atualizarOpcoesDeBairro(); // Atualiza a lista de bairros disponíveis
+    }));
+
+    document.querySelectorAll("input[name='unidades']").forEach(el => el.addEventListener('change', () => {
+        aplicarFiltros(); // Atualiza os resultados
+        atualizarOpcoesDeBairro(); // Atualiza a lista de bairros disponíveis
+    }));
+}
+
+function limparFiltros() {
+    document.querySelector("input[name='regiao'][value='todos']").checked = true;
+    document.querySelector("input[name='bairros'][value='todos']").checked = true;
+    document.querySelector("input[name='unidades'][value='todos']").checked = true;
+
+
+    aplicarFiltros();
+    atualizarOpcoesDeBairro();
+}
+
+// Inicia tudo quando a página carrega
+configurarTodosOsFiltros();
